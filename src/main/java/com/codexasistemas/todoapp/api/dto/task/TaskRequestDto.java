@@ -15,7 +15,7 @@ public record TaskRequestDto(
 
         @NotNull(message = "O ID do usuário é obrigatório.") Long userId,
 
-        @NotNull(message = "O ID da categoria é obrigatório.") Long categoryId,
+        Long categoryId,
 
         List<Long> tagIds,
 

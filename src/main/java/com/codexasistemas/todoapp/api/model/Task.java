@@ -36,7 +36,7 @@ public class Task {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = true)
     private Category category;
 
     @ManyToMany
@@ -94,9 +94,6 @@ public class Task {
     }
 
     public void changeCategory(Category newCategory) {
-        if (newCategory == null) {
-            throw new IllegalArgumentException("Categoria não pode ser nula.");
-        }
         this.category = newCategory;
     }
 
