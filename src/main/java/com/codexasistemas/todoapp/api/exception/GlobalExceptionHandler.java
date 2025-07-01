@@ -22,8 +22,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleGeneric(Exception ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                             .body("Erro interno do servidor: " + ex.getMessage());
+        String message = ex.getMessage();
+        if (message == null || message.trim().isEmpty()) {
+            message = "Erro interno do servidor: " + ex.getClass().getSimpleName();
+        } else {
+            message = "Erro interno do servidor: " + message;
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(message);
     }
 }
 

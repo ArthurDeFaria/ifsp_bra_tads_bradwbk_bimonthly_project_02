@@ -19,6 +19,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -57,7 +58,7 @@ public class TaskServiceImpl implements TaskService {
         Category category = taskRequest.categoryId() != null ? categoryService.findByIdEntity(taskRequest.categoryId()) : null;
         List<Tag> tags = taskRequest.tagIds() != null ? taskRequest.tagIds().stream()
                 .map(tagService::findByIdEntity)
-                .collect(Collectors.toList()) : List.of();
+                .collect(Collectors.toList()) : new ArrayList<>();
 
         Task task = TaskMapper.toEntity(taskRequest, user, category, tags);
         Task savedTask = taskRepository.save(task);
@@ -82,7 +83,7 @@ public class TaskServiceImpl implements TaskService {
         Category category = taskRequest.categoryId() != null ? categoryService.findByIdEntity(taskRequest.categoryId()) : null;
         List<Tag> tags = taskRequest.tagIds() != null ? taskRequest.tagIds().stream()
                 .map(tagService::findByIdEntity)
-                .collect(Collectors.toList()) : List.of();
+                .collect(Collectors.toList()) : new ArrayList<>();
 
         existingTask.updateTitle(taskRequest.title());
         existingTask.updateDescription(taskRequest.description());
@@ -91,7 +92,7 @@ public class TaskServiceImpl implements TaskService {
         existingTask.setTags(tags);
         existingTask.setDueDate(taskRequest.dueDate());
 
-        if (taskRequest.location() != null) {
+        if (taskRequest.location() != null && taskRequest.location().latitude() != null && taskRequest.location().longitude() != null) {
             Location location = new Location(
                     taskRequest.location().latitude(),
                     taskRequest.location().longitude(),
