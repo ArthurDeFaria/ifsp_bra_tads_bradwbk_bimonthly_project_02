@@ -54,7 +54,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskResponseDto create(TaskRequestDto taskRequest) {
         User user = userService.findByIdEntity(taskRequest.userId());
-        Category category = categoryService.findByIdEntity(taskRequest.categoryId());
+        Category category = taskRequest.categoryId() != null ? categoryService.findByIdEntity(taskRequest.categoryId()) : null;
         List<Tag> tags = taskRequest.tagIds() != null ? taskRequest.tagIds().stream()
                 .map(tagService::findByIdEntity)
                 .collect(Collectors.toList()) : List.of();
@@ -79,7 +79,7 @@ public class TaskServiceImpl implements TaskService {
                 .orElseThrow(() -> new EntityNotFoundException("Tarefa não encontrada: " + id));
 
         User user = userService.findByIdEntity(taskRequest.userId());
-        Category category = categoryService.findByIdEntity(taskRequest.categoryId());
+        Category category = taskRequest.categoryId() != null ? categoryService.findByIdEntity(taskRequest.categoryId()) : null;
         List<Tag> tags = taskRequest.tagIds() != null ? taskRequest.tagIds().stream()
                 .map(tagService::findByIdEntity)
                 .collect(Collectors.toList()) : List.of();
