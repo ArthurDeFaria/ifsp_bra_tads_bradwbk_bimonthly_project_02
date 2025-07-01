@@ -1,13 +1,11 @@
 package com.codexasistemas.todoapp.api.dto.location;
 
-import jakarta.validation.constraints.NotNull;
-
 public record LocationDto(
-    Double latitude,
+        Double latitude,
 
-    Double longitude,
+        Double longitude,
 
-    String locationName,
+        String locationName,
 
-    String locationDescription
-) {} 
+        String locationDescription) {
+}
