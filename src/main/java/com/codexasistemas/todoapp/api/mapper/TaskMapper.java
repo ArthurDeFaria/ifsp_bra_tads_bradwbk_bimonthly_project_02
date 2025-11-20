@@ -24,7 +24,7 @@ public class TaskMapper {
             task.getTitle(),
             task.getDescription(),
             task.isDone(),
-            task.getCategory() != null ? task.getCategory().getName() : null,
+            task.getCategory().getName(),
             task.getTags() != null ? task.getTags().stream().map(Tag::getName).toList() : List.of(),
             task.getCreatedAt(),
             task.getDueDate(),
