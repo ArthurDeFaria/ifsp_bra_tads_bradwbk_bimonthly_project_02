@@ -79,6 +79,31 @@ Gerenciamento de Tarefas (ToDo App)
 | PUT        | /api/tasks/{id}            | TaskRequestDto     | TaskResponseDto               | 200   | 400/404     |
 | DELETE     | /api/tasks/{id}            | -                  | TaskResponseDto               | 200   | 404/500     |
 | PATCH      | /api/tasks/{id}/toggle     | -                  | TaskResponseDto               | 200   | 404/500     |
+| PATCH      | /api/tasks/{id}/cancel     | -                  | -                             | 204   | 404/500     |
+
+> #### Corpo da Requisição de Tarefa (`TaskRequestDto`)
+>
+> Ao criar (`POST`) ou atualizar (`PUT`) uma tarefa, o corpo da requisição deve conter os seguintes campos:
+>
+> -   `title` (String, **Obrigatório**): Título da tarefa.
+> -   `userId` (Long, **Obrigatório**): ID do usuário ao qual a tarefa pertence.
+> -   `categoryId` (Long, **Obrigatório**): ID da categoria à qual a tarefa pertence.
+> -   `description` (String, Opcional): Descrição da tarefa.
+> -   `tagIds` (List<Long>, Opcional): Lista de IDs de tags para associar à tarefa.
+> -   `dueDate` (LocalDate, Opcional): Data de vencimento da tarefa (formato: `YYYY-MM-DD`).
+> -   `location` (LocationDto, Opcional): Objeto com dados de localização.
+>
+> **Exemplo de corpo para criar uma nova tarefa:**
+> ```json
+> {
+>   "title": "Finalizar o relatório bimestral",
+>   "userId": 1,
+>   "categoryId": 2,
+>   "description": "O relatório precisa incluir os gráficos de performance.",
+>   "tagIds": [1, 3],
+>   "dueDate": "2025-12-31"
+> }
+> ```
 
 ### Categorias
 
