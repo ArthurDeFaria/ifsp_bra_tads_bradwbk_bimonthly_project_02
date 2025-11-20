@@ -14,5 +14,6 @@ public record TaskResponseDto(
     List<String> tags,
     LocalDateTime createdAt,
     LocalDate dueDate,
+    LocalDateTime canceledAt,
     LocationDto location
 ) {}

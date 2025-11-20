@@ -57,4 +57,10 @@ public class TaskController {
         TaskResponseDto toggledTask = taskService.toggleStatus(id);
         return ResponseEntity.ok(toggledTask);
     }
+
+    @PatchMapping("/{id}/cancel")
+    public ResponseEntity<Void> cancel(@PathVariable Long id) {
+        taskService.cancel(id);
+        return ResponseEntity.noContent().build();
+    }
 }

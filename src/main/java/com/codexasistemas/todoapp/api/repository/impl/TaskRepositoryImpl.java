@@ -30,7 +30,7 @@ public class TaskRepositoryImpl implements TaskRepository {
 
     @Override
     public List<Task> findAll() {
-        return jpa.findAll();
+        return jpa.findByCanceledAtIsNull();
     } 
 
     @Override
@@ -40,6 +40,6 @@ public class TaskRepositoryImpl implements TaskRepository {
 
     @Override
     public List<Task> findByUserId(Long userId) {
-        return jpa.findByUserId(userId);
+        return jpa.findByUserIdAndCanceledAtIsNull(userId);
     }
 }

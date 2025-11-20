@@ -123,4 +123,12 @@ public class TaskServiceImpl implements TaskService {
         Task updatedTask = taskRepository.save(task);
         return TaskMapper.toResponseDto(updatedTask);
     }
+
+    @Override
+    public void cancel(Long id) {
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Tarefa não encontrada: " + id));
+        task.cancel();
+        taskRepository.save(task);
+    }
 }

@@ -28,6 +28,7 @@ public class TaskMapper {
             task.getTags() != null ? task.getTags().stream().map(Tag::getName).toList() : List.of(),
             task.getCreatedAt(),
             task.getDueDate(),
+            task.getCanceledAt(),
             locationDto
         );
     }

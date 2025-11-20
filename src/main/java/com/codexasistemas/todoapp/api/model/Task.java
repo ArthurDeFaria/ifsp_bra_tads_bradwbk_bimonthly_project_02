@@ -31,6 +31,9 @@ public class Task {
     @Column(name = "due_date")
     private LocalDate dueDate;
 
+    @Column(name = "canceled_at")
+    private LocalDateTime canceledAt;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -110,6 +113,16 @@ public class Task {
             location.validateCoordinates();
         }
         this.location = location;
+    }
+
+    public void cancel() {
+        if (this.done)
+            throw new IllegalStateException("A tarefa concluída não pode ser cancelada.");
+        this.canceledAt = LocalDateTime.now();
+    }
+
+    public boolean isCanceled() {
+        return this.canceledAt != null;
     }
 
     @Override

@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface TaskJpaRepository extends JpaRepository<Task, Long> {
-    List<Task> findByUserId(Long userId);
+    List<Task> findByUserIdAndCanceledAtIsNull(Long userId);
+    List<Task> findByCanceledAtIsNull();
 }

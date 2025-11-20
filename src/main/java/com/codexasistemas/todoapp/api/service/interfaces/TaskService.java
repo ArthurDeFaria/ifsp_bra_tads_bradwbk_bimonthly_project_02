@@ -20,4 +20,6 @@ public interface TaskService {
     List<TaskResponseDto> findByUserId(Long userId);
     
     TaskResponseDto toggleStatus(Long id);
+
+    void cancel(Long id);
 }
